@@ -14,7 +14,7 @@ This repo hosts the code for implementing the DSC algorithms for instance segmen
 - **Better improvement for huddled instances:** With shape guidance, DSC's improvement is more significant on images with more huddled instances.
 
 ## Installation
-This implementation is based on [mmdetection](https://github.com/open-mmlab/mmdetection)(v2.1.0). Please refer to [INSTALL.md](docs/INSTALL.md) for installation and dataset preparation. A list of installed packages information from anaconda is provided in conda_list.txt
+This implementation is based on [mmdetection](https://github.com/open-mmlab/mmdetection)(v2.1.0). Please refer to [INSTALL.md](https://github.com/open-mmlab/mmdetection/blob/v2.1.0/docs/install.md) for installation and dataset preparation. A list of installed packages information from anaconda is provided in conda_list.txt
 
 ## Model Zoo
 We provide the following trained models on COCO
