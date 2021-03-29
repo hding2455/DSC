@@ -20,7 +20,7 @@ This implementation is based on [mmdetection](https://github.com/open-mmlab/mmde
 We provide the following trained models on COCO
 
 Model | Backbone | Multi-scale training | Lr schd | box AP | Mask AP | config | Model
---- |:---:|:---:|:---:|:---: |:---: |:---: |:---:
+:---: |:---:|:---:|:---:|:---: |:---: |:---: |:---:
 F-DSC| R50-FPN | No | 1x | 44.5 | 39.5 | [config](configs/dsc/fast_dsc_r50_fpn_1x_coco.py) | [download](https://www.icloud.com/iclouddrive/05yKomhpHgJtq0id3c_w0DfsA#f_dsc_r50_fpn_1x_coco)
 DSC| R50-FPN | No | 1x | 44.7 | 39.4 | [config](configs/dsc/dsc_r50_fpn_1x_coco.py) | [download](https://www.icloud.com/iclouddrive/0n6D3LmBoQj04riZf8OpyuO7g#dsc_r50_fpn_1x_coco)
 DSC| R50-FPN | No | 20e | 45.8 | 40.1 | [config](configs/dsc/dsc_r50_fpn_20e_coco.py) | [download](https://www.icloud.com/iclouddrive/04KDNWYuoO5pDkklVASW3GKJA#dsc_r50_fpn_20e_coco)
@@ -67,4 +67,4 @@ Please consider citing our papers in your publications if this repo helps you.
 ```
 
 ## License
-For academic use, this project is licensed under the 2-clause BSD License - see the LICENSE file for details. For commercial use, please contact Hao Ding [email](hding15@jhu.edu) and  [Wei Shen](https://shenwei1231.github.io/).
+For academic use, this project is licensed under the 2-clause BSD License - see the LICENSE file for details. For commercial use, please contact Hao Ding ([email](hding15@jhu.edu)) and  [Wei Shen](https://shenwei1231.github.io/).
