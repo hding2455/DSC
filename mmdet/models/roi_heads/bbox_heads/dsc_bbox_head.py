@@ -1,10 +1,12 @@
 import torch.nn as nn
+import torch.nn.functional as F
 import torch
 from mmcv.cnn import ConvModule, build_conv_layer
-from mmdet.core import multi_apply, force_fp32
+from mmdet.core import multi_apply, force_fp32, dsc_multiclass_nms
 from mmdet.models.builder import HEADS
 from .bbox_head import BBoxHead
 from .convfc_bbox_head import ConvFCBBoxHead
+
 
 
 @HEADS.register_module()
@@ -134,6 +136,45 @@ class DSCBBoxHead(ConvFCBBoxHead):
             bbox_weights[pos_inds, :] = 1.0
 
         return labels, label_weights, bbox_targets, bbox_weights
+
+    @force_fp32(apply_to=('cls_score', 'bbox_pred'))
+    def get_bboxes(self,
+                   rois,
+                   cls_score,
+                   bbox_pred,
+                   img_shape,
+                   scale_factor,
+                   rescale=False,
+                   cfg=None):
+        if isinstance(cls_score, list):
+            cls_score = sum(cls_score) / float(len(cls_score))
+        scores = F.softmax(cls_score, dim=1) if cls_score is not None else None
+
+        if bbox_pred is not None:
+            bboxes = self.bbox_coder.decode(
+                rois[:, 1:], bbox_pred, max_shape=img_shape)
+        else:
+            bboxes = rois[:, 1:].clone()
+            if img_shape is not None:
+                bboxes[:, [0, 2]].clamp_(min=0, max=img_shape[1])
+                bboxes[:, [1, 3]].clamp_(min=0, max=img_shape[0])
+
+        if rescale:
+            if isinstance(scale_factor, float):
+                bboxes /= scale_factor
+            else:
+                scale_factor = bboxes.new_tensor(scale_factor)
+                bboxes = (bboxes.view(bboxes.size(0), -1, 4) /
+                          scale_factor).view(bboxes.size()[0], -1)
+
+        if cfg is None:
+            return bboxes, scores
+        else:
+            det_bboxes, det_labels, det_ros_inds = dsc_multiclass_nms(bboxes, scores,
+                                                    cfg.score_thr, cfg.nms,
+                                                    cfg.max_per_img)
+
+            return det_bboxes, det_labels, det_ros_inds
 
     def get_unsampled_targets(self,
                     sampling_results,
