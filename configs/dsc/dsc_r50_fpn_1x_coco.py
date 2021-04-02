@@ -282,8 +282,7 @@ test_cfg = dict(
         max_per_img=100,
         mask_thr_binary=0.5))
 
-#data_root = 'data/coco/'
-data_root = '/mnt/cache/dinghao/mmdetection/data/coco/'
+data_root = 'data/coco/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
 train_pipeline = [
@@ -317,8 +316,7 @@ test_pipeline = [
 ]
 data = dict(
     train=dict(
-       seg_prefix=data_root + 'stuffthingmaps/train2017/',
-        #seg_prefix=data_root + 'stuffthingmaps/val2017/',
+        seg_prefix=data_root + 'stuffthingmaps/train2017/',
         pipeline=train_pipeline),
     val=dict(pipeline=test_pipeline),
     test=dict(pipeline=test_pipeline))
