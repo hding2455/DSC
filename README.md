@@ -68,4 +68,4 @@ Please consider citing our papers in your publications if this repo helps you.
 ```
 
 ## License
-For academic use, this project is licensed under the 2-clause BSD License - see the LICENSE file for details. For commercial use, please contact Hao Ding ([email](hding15@jhu.edu)) and  [Wei Shen](https://shenwei1231.github.io/).
+For academic use, this project is licensed under the 2-clause BSD License - see the LICENSE file for details. For commercial use, please contact Hao Ding ([email](mailto:hding15@jhu.edu)) and  [Wei Shen](https://shenwei1231.github.io/).
